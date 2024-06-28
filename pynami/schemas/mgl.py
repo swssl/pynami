@@ -260,6 +260,23 @@ class Mitglied(BaseModel):
         """
         userjson = MitgliedSchema().dump(self)
         return nami.mitglied(self.id, 'PUT', json=userjson)
+    
+    def is_leader(self, nami) -> bool:
+        """Get leader status of Member
+
+        Args:
+            nami (pynami.nami.Nami): Main class for communication with the |NAMI|
+
+        Returns:
+            bool: True if the member is a leader, False otherwise
+        """
+        try:
+            for ac in nami.mgl_activities(self.id):
+                if ac.taetigkeit.startswith('€ Leiter'):
+                    return True
+        except AttributeError as e:
+            raise ValueError("nami needs to be an instance of pynami.nami.Nami") from e
+        return False
 
 
 class MitgliedSchema(BaseSchema):
