@@ -8,8 +8,6 @@ import os
 import csv
 import webbrowser
 import datetime
-# from tkinter import Tk
-# from tkinter.filedialog import asksaveasfilename
 
 # Third party imports
 from tabulate import tabulate
@@ -161,11 +159,13 @@ def export_xlsx(data, attrs=None, includeheader=True, tableName='Tabelle1',
 
     # Optional saving as file
     if write_to_file:
-        # if not filepath:
-        #     Tk().withdraw()
-        #     filepath = asksaveasfilename(filetypes=[('Excel files', '*.xlsx')],
-        #                                  initialdir = os.getcwd(),
-        #                                  defaultextension=".xlsx")
+        if not filepath:
+            from tkinter import Tk
+            from tkinter.filedialog import asksaveasfilename
+            Tk().withdraw()
+            filepath = asksaveasfilename(filetypes=[('Excel files', '*.xlsx')],
+                                         initialdir = os.getcwd(),
+                                         defaultextension=".xlsx")
         if filepath:
             wb.save(filepath)
 

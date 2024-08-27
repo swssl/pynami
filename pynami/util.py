@@ -8,8 +8,6 @@ import time
 import tempfile as tf
 import subprocess as sp
 from html.parser import HTMLParser
-# from tkinter.filedialog import asksaveasfilename
-# from tkinter import Tk
 from marshmallow import ValidationError
 from schwifty import IBAN
 
@@ -93,11 +91,13 @@ def open_download_pdf(content, open_file=True, save_file=False, timeout=10,
         filename (:obj:`str`, optional): Full path to save file
     """
     if save_file:
-        # if not filename:
-        #     Tk().withdraw()
-        #     filename = asksaveasfilename(filetypes=[('pdf files', '*.pdf')],
-        #                                  initialdir = os.getcwd(),
-        #                                  defaultextension=".pdf")
+        if not filename:
+            from tkinter.filedialog import asksaveasfilename
+            from tkinter import Tk
+            Tk().withdraw()
+            filename = asksaveasfilename(filetypes=[('pdf files', '*.pdf')],
+                                         initialdir = os.getcwd(),
+                                         defaultextension=".pdf")
         if filename:
             with open(filename, 'wb') as f:
                 f.write(content)
