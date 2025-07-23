@@ -57,7 +57,7 @@ class SearchSchema(BaseSchema):
     """str: City"""
     mitgliedsNummer = fields.String(data_key='mitgliedsNummber')
     """str: The |DPSG| id"""
-    mglStatusId = fields.String(allow_none=True, default=None)
+    mglStatusId = fields.String(allow_none=True, load_default=None)
     """str: If the member is active"""
     mglTypeId = fields.List(fields.String)
     """:obj:`list` of :obj:`str`: Kind of membership"""
@@ -69,11 +69,11 @@ class SearchSchema(BaseSchema):
     """str: Nickname"""
     zeitschriftenversand = fields.Boolean()
     """bool: If the member gets the |DPSG| newpaper"""
-    gruppierung4Id = fields.Integer(allow_none=True, default=None)
+    gruppierung4Id = fields.Integer(allow_none=True, load_default=None)
     """int: Unused"""
-    gruppierung5Id = fields.Integer(allow_none=True, default=None)
+    gruppierung5Id = fields.Integer(allow_none=True, load_default=None)
     """int: Unused"""
-    gruppierung6Id = fields.Integer(allow_none=True, default=None)
+    gruppierung6Id = fields.Integer(allow_none=True, load_default=None)
     """int: Unused"""
     privacy = fields.String()
     """str: Unused"""
@@ -84,31 +84,31 @@ class SearchSchema(BaseSchema):
     taetigkeitId = fields.List(fields.Integer)
     """:obj:`list` of :obj:`int`: List of activities the mambers are comitted
     to"""
-    mitAllenTaetigkeiten = fields.Boolean(default=False)
+    mitAllenTaetigkeiten = fields.Boolean(load_default=False)
     """bool: Whether to search in all active activities"""
-    withEndedTaetigkeiten = fields.Boolean(default=False)
+    withEndedTaetigkeiten = fields.Boolean(load_default=False)
     """bool: Whether to search also in activities that have already ended"""
 
     # This group and the following are mutually exclusive
-    ebeneId = fields.Integer(allow_none=True, default=None)
+    ebeneId = fields.Integer(allow_none=True, load_default=None)
     """int: Represents a |DPSG| structural level"""
     grpNummer = fields.String()
     """str: Group id"""
     grpName = fields.String()
     """str: Group name"""
 
-    gruppierung1Id = fields.Integer(allow_none=True, default=None)
+    gruppierung1Id = fields.Integer(allow_none=True, load_default=None)
     """int: Group id of a Diözese"""
-    gruppierung2Id = fields.Integer(allow_none=True, default=None)
+    gruppierung2Id = fields.Integer(allow_none=True, load_default=None)
     """int: Group id of a Bezirk"""
-    gruppierung3Id = fields.Integer(allow_none=True, default=None)
+    gruppierung3Id = fields.Integer(allow_none=True, load_default=None)
     """int: Group id of a Stamm"""
-    inGrp = fields.Boolean(default=False)
+    inGrp = fields.Boolean(load_default=False)
     """bool: Whether to search in the group"""
-    unterhalbGrp = fields.Boolean(default=False)
+    unterhalbGrp = fields.Boolean(load_default=False)
     """bool: Whether to search in subgroups"""
 
-    searchType = fields.String(default='MITGLIEDER')
+    searchType = fields.String(load_default='MITGLIEDER')
     """str: Default search type. Not even strictly neccessary."""
 
     class Meta(BaseSchema.Meta):
