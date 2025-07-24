@@ -121,7 +121,10 @@ class NaMi(object):
         }
 
         url = URLS['AUTH']
-        r = self.s.post(url, data=payload)
+        r = self.s.post(url, data=payload, allow_redirects=False)
+        if r.status_code ==302 and r.next.url.startswith("http://"):
+            r.next.url = r.next.url.replace("http://", "https://")
+            r = self.s.send(r.next)
         if r.status_code != 200:
             raise ValueError('Authentication failed!')
 
